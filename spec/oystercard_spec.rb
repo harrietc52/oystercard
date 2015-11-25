@@ -25,6 +25,25 @@ describe Oystercard do
     it 'can deduct amount from balance' do
       expect { subject.deduct(1)}.to change{subject.balance}.by(-1)
     end
+  end
+
+  describe '#journey' do
+    it 'is not in journey when initialized' do
+      expect(subject.in_journey).to be false
+    end
+
+    it 'can touch in' do
+      subject.top_up 20
+      subject.touch_in_out
+      expect(subject.in_journey).to be true
+    end
+
+    it 'can touch out' do
+      subject.top_up 20
+      subject.touch_in_out
+      subject.touch_in_out
+      expect(subject.in_journey).to be false
+    end
 
   end
 
