@@ -45,6 +45,10 @@ describe Oystercard do
       expect(subject.in_journey).to be false
     end
 
+    it 'raises error if minimum is reached' do
+      min_balance = Oystercard::MIN_LIMIT
+      expect { subject.touch_in_out}.to raise_error 'Please top up. Current balance is £0'
+    end
   end
 
 end
